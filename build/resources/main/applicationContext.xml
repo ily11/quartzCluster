@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描组件-->
+    <context:component-scan base-package="com.bupt.job" />
+
+    <!--定时任务扫描-->
+    <!--<task:annotation-driven />-->
+
+
+    <!--****************************************非集群job的配置方式****************************************-->
+    <bean name="jobCTaskJob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="jobC"/>
+        </property>
+        <property name="targetMethod">
+            <value>doJob</value>
+        </property>
+        <property name="concurrent">
+            <value>false</value>
+        </property>
+    </bean>
+
+    <!-- 配置触发器 -->
+    <bean id="jobCTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobCTaskJob"/>
+        <property name="cronExpression" value="0/1 * * * * ?"/>
+    </bean>
+
+    <!-- 配置调度器\触发器\job -->
+    <bean name="quartzScheduler2" lazy-init="false" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean ">
+        <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+        <property name="triggers">
+            <list>
+                <ref bean="jobCTaskTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--****************************************集群job的配置方式*******************************************-->
+    <bean id="jobAATaskJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.bupt.common.JobDetailBean" />
+        <property name="durability" value="true" />
+        <property name="description" value="jobAATaskJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="targetObject" value="jobAA" />
+                <entry key="targetMethod" value="doJob" />
+            </map>
+        </property>
+    </bean>
+    <bean id="jobBBTaskJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.bupt.common.JobDetailBean" />
+        <property name="durability" value="true" />
+        <property name="description" value="jobBBTaskJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="targetObject" value="jobBB" />
+                <entry key="targetMethod" value="doJob" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- 配置触发器 -->
+    <bean id="jobAATaskTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobAATaskJob"/>
+        <property name="cronExpression" value="0/1 * * * * ?"/>
+    </bean>
+    <bean id="jobBBTaskTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobBBTaskJob"/>
+        <property name="cronExpression" value="0/1 * * * * ?"/>
+    </bean>
+
+    <!-- 配置调度器\触发器\job -->
+    <bean id="clusterQuartzScheduler" name="quartzScheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean ">
+        <property name="dataSource" ref="dataSource"/>
+        <!--  quartz配置文件路径-->
+        <!--<property name="configLocation" value="classpath:quartz.properties" />-->
+
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.instanceName">TaskManager_Scheduler</prop>
+                <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+                <!-- 线程池配置 -->
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">20</prop>
+                <prop key="org.quartz.threadPool.threadPriority">5</prop>
+                <!-- JobStore 配置 1.如下使用数据库 2.使用内存 org.quartz.simpl.RAMJobStore -->
+                <prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+
+                <!-- 集群配置 -->
+                <!--通知Scheduler实例要它参与到一个集群当中-->
+                <prop key="org.quartz.jobStore.isClustered">true</prop>
+                <!--定义了Scheduler实例检入到数据库中的频率(单位：毫秒)-->
+                <prop key="org.quartz.jobStore.clusterCheckinInterval">15000</prop>
+                <prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
+                <prop key="org.quartz.jobStore.misfireThreshold">120000</prop>
+                <prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop>
+            </props>
+        </property>
+        <property name="schedulerName" value="TaskManagerScheduler"/>
+
+        <!--必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
+        <property name="startupDelay" value="3"/>
+
+        <!--可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了 -->
+        <property name="overwriteExistingJobs" value="true"/>
+
+        <!-- 设置自动启动 -->
+        <property name="autoStartup" value="true"/>
+
+
+        <!--具体Trigger配置-->
+        <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+        <property name="triggers">
+            <list>
+                <ref bean="jobAATaskTrigger"/>
+                <ref bean="jobBBTaskTrigger"/>
+                <!--<ref bean="jobCTaskTrigger"/>-->
+            </list>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,67 @@
+2018-01-18 11:36:17 [main] ERROR  access - Configuration problem: Error evaluating Groovy script: class path resource [applicationContext.groovy] cannot be opened because it does not exist
+Offending resource: class path resource [applicationContext.groovy]; nested exception is java.io.FileNotFoundException: class path resource [applicationContext.groovy] cannot be opened because it does not exist
+2018-01-18 11:37:08 [main] ERROR  access - Configuration problem: Error evaluating Groovy script: startup failed:
+beans: 1: unable to resolve class com.mobile.security.taskmanager.common.SubTaskToString
+ @ line 1, column 1.
+   import com.mobile.security.taskmanager.common.SubTaskToString
+   ^
+
+1 error
+
+Offending resource: class path resource [applicationContext.groovy]; nested exception is org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+beans: 1: unable to resolve class com.mobile.security.taskmanager.common.SubTaskToString
+ @ line 1, column 1.
+   import com.mobile.security.taskmanager.common.SubTaskToString
+   ^
+
+1 error
+
+2018-01-18 11:37:55 [main] ERROR  access - Configuration problem: Error evaluating Groovy script: No such property: SubTaskToString for class: beans
+Offending resource: class path resource [applicationContext.groovy]; nested exception is groovy.lang.MissingPropertyException: No such property: SubTaskToString for class: beans
+2018-01-18 11:38:40 [main] WARN   org.springframework.context.support.ClassPathXmlApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'dataSource' available
+2018-01-18 11:38:40 [main] ERROR  access - Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'dataSource' available
+2018-01-18 11:39:07 [main] WARN   org.springframework.context.support.ClassPathXmlApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'dataSource' available
+2018-01-18 11:39:07 [main] ERROR  access - Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'dataSource' available
+2018-01-18 11:42:52 [main] WARN   org.quartz.impl.jdbcjobstore.JobStoreTX - Database connection shutdown unsuccessful.
+java.sql.SQLException: There is no DataSource named 'null'
+	at org.quartz.utils.DBConnectionManager.shutdown(DBConnectionManager.java:135)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.shutdown(JobStoreSupport.java:741)
+	at org.quartz.core.QuartzScheduler.shutdown(QuartzScheduler.java:760)
+	at org.quartz.impl.StdSchedulerFactory.shutdownFromInstantiateException(StdSchedulerFactory.java:1378)
+	at org.quartz.impl.StdSchedulerFactory.instantiate(StdSchedulerFactory.java:1344)
+	at org.quartz.impl.StdSchedulerFactory.getScheduler(StdSchedulerFactory.java:1525)
+	at org.springframework.scheduling.quartz.SchedulerFactoryBean.createScheduler(SchedulerFactoryBean.java:599)
+	at org.springframework.scheduling.quartz.SchedulerFactoryBean.afterPropertiesSet(SchedulerFactoryBean.java:482)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:742)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
+	at com.bupt.MainProgram.main(MainProgram.java:18)
+2018-01-18 11:42:52 [main] WARN   org.springframework.context.support.ClassPathXmlApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.quartz.SchedulerConfigException: DataSource name not set.
+2018-01-18 11:42:52 [main] ERROR  access - Error creating bean with name 'clusterQuartzScheduler' defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.quartz.SchedulerConfigException: DataSource name not set.
+2018-01-18 15:47:01 [TaskManagerScheduler_QuartzSchedulerThread] ERROR  org.quartz.core.ErrorLogger - An error occurred while scanning for the next triggers to fire.
+org.quartz.JobPersistenceException: Couldn't acquire next trigger: Couldn't retrieve trigger: No record found for selection of Trigger with key: 'DEFAULT.jobBBTaskTrigger' and statement: SELECT * FROM QRTZ_CRON_TRIGGERS WHERE SCHED_NAME = 'TaskManagerScheduler' AND TRIGGER_NAME = ? AND TRIGGER_GROUP = ?
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.acquireNextTrigger(JobStoreSupport.java:2864)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport$40.execute(JobStoreSupport.java:2759)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport$40.execute(JobStoreSupport.java:2757)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.executeInNonManagedTXLock(JobStoreSupport.java:3803)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.acquireNextTriggers(JobStoreSupport.java:2756)
+	at org.quartz.core.QuartzSchedulerThread.run(QuartzSchedulerThread.java:272)
+Caused by: org.quartz.JobPersistenceException: Couldn't retrieve trigger: No record found for selection of Trigger with key: 'DEFAULT.jobBBTaskTrigger' and statement: SELECT * FROM QRTZ_CRON_TRIGGERS WHERE SCHED_NAME = 'TaskManagerScheduler' AND TRIGGER_NAME = ? AND TRIGGER_GROUP = ?
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.retrieveTrigger(JobStoreSupport.java:1533)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.acquireNextTrigger(JobStoreSupport.java:2808)
+	... 5 common frames omitted
+Caused by: java.lang.IllegalStateException: No record found for selection of Trigger with key: 'DEFAULT.jobBBTaskTrigger' and statement: SELECT * FROM QRTZ_CRON_TRIGGERS WHERE SCHED_NAME = 'TaskManagerScheduler' AND TRIGGER_NAME = ? AND TRIGGER_GROUP = ?
+	at org.quartz.impl.jdbcjobstore.CronTriggerPersistenceDelegate.loadExtendedTriggerProperties(CronTriggerPersistenceDelegate.java:92)
+	at org.quartz.impl.jdbcjobstore.StdJDBCDelegate.selectTrigger(StdJDBCDelegate.java:1819)
+	at org.quartz.impl.jdbcjobstore.JobStoreSupport.retrieveTrigger(JobStoreSupport.java:1531)
+	... 6 common frames omitted

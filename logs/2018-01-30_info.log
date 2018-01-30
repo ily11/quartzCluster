@@ -1,0 +1,43 @@
+2018-01-30 10:00:08 [main] INFO   org.springframework.context.annotation.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@3cce57c7: startup date [Tue Jan 30 10:00:08 CST 2018]; root of context hierarchy
+2018-01-30 10:00:08 [main] INFO   org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [applicationContext.xml]
+2018-01-30 10:00:09 [main] INFO   org.springframework.jdbc.datasource.DriverManagerDataSource - Loaded JDBC driver: com.mysql.jdbc.Driver
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.2.3 created.
+2018-01-30 10:00:09 [main] INFO   org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'quartzScheduler2' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler2' initialized from an externally provided properties instance.
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.2.3
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@25ddbbbb
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.2.3 created.
+2018-01-30 10:00:09 [main] INFO   org.springframework.scheduling.quartz.LocalDataSourceJobStore - Using db table-based data access locking (synchronization).
+2018-01-30 10:00:09 [main] INFO   org.springframework.scheduling.quartz.LocalDataSourceJobStore - JobStoreCMT initialized.
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'TaskManagerScheduler' with instanceId 'liyan-ThinkCentre-M8600t-D0641517277609351'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 20 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'TaskManagerScheduler' initialized from an externally provided properties instance.
+2018-01-30 10:00:09 [main] INFO   org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.2.3
+2018-01-30 10:00:09 [main] INFO   org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@40f33492
+2018-01-30 10:00:12 [main] INFO   org.springframework.context.support.DefaultLifecycleProcessor - Starting beans in phase 2147483647
+2018-01-30 10:00:12 [main] INFO   org.springframework.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+2018-01-30 10:00:12 [main] INFO   org.quartz.core.QuartzScheduler - Scheduler quartzScheduler2_$_NON_CLUSTERED started.
+2018-01-30 10:00:12 [main] INFO   org.springframework.scheduling.quartz.SchedulerFactoryBean - Will start Quartz Scheduler [TaskManagerScheduler] in 3 seconds
+2018-01-30 10:00:15 [Quartz Scheduler [TaskManagerScheduler]] INFO   org.springframework.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now, after delay of 3 seconds
+2018-01-30 10:00:16 [Quartz Scheduler [TaskManagerScheduler]] INFO   org.springframework.scheduling.quartz.LocalDataSourceJobStore - ClusterManager: detected 1 failed or restarted instances.
+2018-01-30 10:00:16 [Quartz Scheduler [TaskManagerScheduler]] INFO   org.springframework.scheduling.quartz.LocalDataSourceJobStore - ClusterManager: Scanning for instance "liyan-ThinkCentre-M8600t-D0641517208501828"'s failed in-progress jobs.
+2018-01-30 10:00:16 [Quartz Scheduler [TaskManagerScheduler]] INFO   org.springframework.scheduling.quartz.LocalDataSourceJobStore - ClusterManager: ......Cleaned-up 1 other failed job(s).
+2018-01-30 10:00:17 [Quartz Scheduler [TaskManagerScheduler]] INFO   org.quartz.core.QuartzScheduler - Scheduler TaskManagerScheduler_$_liyan-ThinkCentre-M8600t-D0641517277609351 started.
